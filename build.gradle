@@ -1,60 +1,64 @@
 // Plugins
 plugins {
-  id "checkstyle"
-  id "application"
-  id "com.github.spotbugs" version "4.8.4"
+   id "checkstyle"
+   id "application"
+   id "com.github.spotbugs" version "5.0.13"
 }
 
 // apply
 apply plugin: 'application'
-
-// given path [src\Assignment5.java] where Assignment5.java is main class
-mainClassName = 'Assignment5' // should be correct ?
+apply plugin: 'checkstyle'
 
 compileJava.options.encoding = 'UTF-8'
 
 // Repositories
 repositories {
-  mavenCentral()
-  gradlePluginPortal()
+   mavenCentral()
+   gradlePluginPortal()
 }
 
 // Dependencies
 dependencies {
-  implementation 'com.io7m.xom:xom:1.2.+'
-  implementation 'net.sourceforge.nekohtml:nekohtml:1.9.+'
-  testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.0'
-  testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.0'
-  testImplementation 'org.junit.jupiter:junit-jupiter-params:5.9.0'
+   implementation 'com.io7m.xom:xom:1.2.+'
+   implementation 'net.sourceforge.nekohtml:nekohtml:1.9.+'
+   testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.0'
+   testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.0'
+   testImplementation 'org.junit.jupiter:junit-jupiter-params:5.9.0'
+}
+
+// given path [src\Assignment5.java] where Assignment5.java is main class
+mainClassName = 'Assignment5' // should be correct ?
+
+task unitTest( type: Test ) {
+   useJUnitPlatform()
 }
 
 // Checkstyle
-apply plugin: 'checkstyle'
 checkstyle {
-  // keep checkstyle quieter
-  ignoreFailures = true
-  showViolations = false
+   // keep checkstyle quieter
+   ignoreFailures = true
+   showViolations = false
 }
 tasks.withType(Checkstyle) {
-  checkstyle {
-    toolVersion = "8.8"
-  }
+   checkstyle {
+      toolVersion = "8.8"
+   }
 }
 
 // JUnit 5
 test {
-  useJUnitPlatform() // enables
-  testLogging { //settings for JUnit5
-    events "passed", "skipped", "failed"
-  }
+   useJUnitPlatform() // enables
+   testLogging { //settings for JUnit5
+      events "passed", "skipped", "failed"
+   }
 }
 
 // SpotBugs
 tasks.withType(com.github.spotbugs.snom.SpotBugsTask).configureEach {
-  reports {
-    html.required.set(true)
-    xml.required.set(false)
-  }
-  effort = 'max'
-  reportLevel = 'low'
+   reports {
+      html.required.set(true)
+      xml.required.set(false)
+   }
+   effort = 'max'
+   reportLevel = 'low'
 }
