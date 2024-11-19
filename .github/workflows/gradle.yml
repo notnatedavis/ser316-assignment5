@@ -38,7 +38,7 @@ jobs:
 
     # Verify Gradle Wrapper
     - name: Verify Gradle Wrapper
-      run: ./gradlew wrapper --gradle-version 8.2
+      run: ./gradlew wrapper --version
 
     # Run Gradle Build
     - name: Build with Gradle
