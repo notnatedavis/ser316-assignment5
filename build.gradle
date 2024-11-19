@@ -1,13 +1,13 @@
 // Plugins
 plugins {
   id "checkstyle"
-  id 'jacoco'
-
 }
+
 // apply
 apply plugin: 'application'
 
-mainClassName = 'main.java.memoranda.Start' // correct
+// given path [src\a\b.java] where b.java is main class
+mainClassName = 'a.b' // Update
 
 compileJava.options.encoding = 'UTF-8'
 
@@ -27,6 +27,7 @@ dependencies {
   implementation files('cls/') // update ?
 }
 
+// Checkstyle
 apply plugin: 'checkstyle'
 checkstyle {
   // keep checkstyle quieter
@@ -39,36 +40,10 @@ tasks.withType(Checkstyle) {
   }
 }
 
+// JUnit 5
 test {
     useJUnitPlatform() // enables
     testLogging { //settings for JUnit5
         events "passed", "skipped", "failed"
     }
 }
-
-task fatJar(type: Jar) {
-    manifest {
-        attributes 'Main-Class': 'main.java.memoranda.Start'
-    }
-    archiveBaseName = 'localMemoranda' /// JAR name to create here
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    from { 
-      configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) } 
-    }
-    with jar
-}
-
-/*jacocoTestReport {
-    dependsOn test // tests are required to run before generating the report
-}
-jacoco {
-    toolVersion = "0.8.8"
-    reportsDirectory = layout.buildDirectory.dir('customJacocoReportDir')
-}
-jacocoTestReport {
-    reports {
-        xml.required = false
-        csv.required = false
-        html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
-    }
-}*/
