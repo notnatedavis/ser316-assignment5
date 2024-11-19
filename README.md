@@ -1,10 +1,10 @@
 # ser316-assignment5
 
 ### Screencast  
-> (x)  
+> (link here)  
 
 ### Explanation of Design Patterns  
 > I fulfilled the requirements for x Pattern by ...  
 
 ### List of sources  
-> (x)  
+> (sources here)  
