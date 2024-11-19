@@ -1,9 +1,5 @@
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-# This workflow will build a Java project with Gradle and cache/restore any dependencies to improve the workflow execution time
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-gradle
+# gradle.yml for Github Actions
+# Assignment 5 : Unit Tests , SpotBugs , Checkstyle
 
 name: Java CI with Gradle
 
@@ -15,17 +11,16 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     permissions:
       contents: read
 
     steps:
-    # checkout repository code
-    - name: checkout code
-    - uses: actions/checkout@v4
+    # Checkout repository code
+    - name: Checkout code
+      uses: actions/checkout@v4
 
-    # set up JDK
+    # Set up JDK
     - name: Set up JDK
       uses: actions/setup-java@v4
       with:
@@ -39,7 +34,7 @@ jobs:
         path: ~/.gradle/caches
         key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
         restore-keys: |
-            ${{ runner.os }}-gradle
+          ${{ runner.os }}-gradle
 
     # Verify Gradle Wrapper
     - name: Verify Gradle Wrapper
@@ -62,20 +57,22 @@ jobs:
       run: ./gradlew checkstyleMain
 
   dependency-submission:
-
     runs-on: ubuntu-latest
     permissions:
       contents: write
 
     steps:
-    - uses: actions/checkout@v4
+    # Checkout repository code
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    # Set up JDK
     - name: Set up JDK
       uses: actions/setup-java@v4
       with:
         java-version: '17'
         distribution: 'temurin'
 
-    # Generates and submits a dependency graph, enabling Dependabot Alerts for all project dependencies.
-    # See: https://github.com/gradle/actions/blob/main/dependency-submission/README.md
+    # Generate and submit dependency graph
     - name: Generate and submit dependency graph
-      uses: gradle/actions/dependency-submission@af1da67850ed9a4cedd57bfd976089dd991e2582 # v4.0.0
+      uses: gradle/actions/dependency-submission@v4.0.0
