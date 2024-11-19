@@ -6,8 +6,8 @@ plugins {
 // apply
 apply plugin: 'application'
 
-// given path [src\a\b.java] where b.java is main class
-mainClassName = 'a.b' // Update
+// given path [src\Assignment5.java] where Assignment5.java is main class
+mainClassName = 'Assignment5' // should be correct ?
 
 compileJava.options.encoding = 'UTF-8'
 
