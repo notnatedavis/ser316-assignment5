@@ -9,7 +9,7 @@ plugins {
 apply plugin: 'application'
 
 // given path [src\Assignment5.java] where Assignment5.java is main class
-mainClassName = 'src.Assignment5' // should be correct ?
+mainClassName = 'Assignment5' // should be correct ?
 
 compileJava.options.encoding = 'UTF-8'
 
@@ -26,7 +26,6 @@ dependencies {
   testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.0'
   testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.0'
   testImplementation 'org.junit.jupiter:junit-jupiter-params:5.9.0'
-  implementation files('cls/') // update ?
 }
 
 // Checkstyle
