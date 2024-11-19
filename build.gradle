@@ -1,13 +1,15 @@
 // Plugins
 plugins {
   id "checkstyle"
+  id "application"
+  id "com.github.spotbugs" version "4.8.4"
 }
 
 // apply
 apply plugin: 'application'
 
 // given path [src\Assignment5.java] where Assignment5.java is main class
-mainClassName = 'Assignment5' // should be correct ?
+mainClassName = 'src.Assignment5' // should be correct ?
 
 compileJava.options.encoding = 'UTF-8'
 
@@ -42,23 +44,18 @@ tasks.withType(Checkstyle) {
 
 // JUnit 5
 test {
-    useJUnitPlatform() // enables
-    testLogging { //settings for JUnit5
-        events "passed", "skipped", "failed"
-    }
+  useJUnitPlatform() // enables
+  testLogging { //settings for JUnit5
+    events "passed", "skipped", "failed"
+  }
 }
 
 // SpotBugs
-spotbugs {
-    toolVersion = '4.8.4'
-    ignoreFailures = true
-    showProgress = true
-    effort = 'max'
-    reportLevel = 'low'
-}
 tasks.withType(com.github.spotbugs.snom.SpotBugsTask).configureEach {
-    reports {
-        html.required.set(true)
-        xml.required.set(false)
-    }
+  reports {
+    html.required.set(true)
+    xml.required.set(false)
+  }
+  effort = 'max'
+  reportLevel = 'low'
 }
