@@ -1,4 +1,4 @@
-// package x; // might need later
+package src;
 
 // import x; // might need later
 
@@ -8,9 +8,7 @@
   * @since 11/19/2024
   */
 public class Assignment5 {
-  // variables here
-
-  // methods here
-
-  System.out.println("Hello World");
+   public static void main(String[] args) { // placeholder
+      System.out.println("Hello World");
+   }
 }
