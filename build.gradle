@@ -3,6 +3,7 @@ plugins {
    id "checkstyle"
    id "application"
    id "com.github.spotbugs" version "5.0.13"
+   id "jacoco"
 }
 
 // apply
@@ -30,24 +31,20 @@ dependencies {
 // given path [src\main\java\Assignment5.java] where Assignment5.java is main class
 mainClassName = 'Assignment5' // correct
 
+// Unit Test task
 task unitTest( type: Test ) {
    useJUnitPlatform()
 }
 
 // Gradle Jacoco Report
 jacocoTestReport {
-    dependsOn test // tests are required to run before generating the report
-}
-jacoco {
-    toolVersion = "0.8.8"
-    reportsDirectory = layout.buildDirectory.dir('customJacocoReportDir')
-}
-jacocoTestReport {
-    reports {
-        xml.required = false
-        csv.required = false
-        html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
-    }
+   dependsOn test // Ensure tests run before generating the report
+   reports {
+      html.required = true
+      xml.required = false
+      csv.required = false
+      html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
+   }
 }
 
 // Checkstyle
@@ -79,3 +76,6 @@ tasks.withType(com.github.spotbugs.snom.SpotBugsTask).configureEach {
    effort = 'max'
    reportLevel = 'low'
 }
+
+// Jacoco HTML report part of build (wont generate if no test)
+build.finalizedBy jacocoTestReport // @ end
