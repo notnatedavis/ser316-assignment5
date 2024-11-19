@@ -8,6 +8,7 @@ plugins {
 // apply
 apply plugin: 'application'
 apply plugin: 'checkstyle'
+apply plugin: 'jacoco'
 
 compileJava.options.encoding = 'UTF-8'
 
@@ -27,10 +28,26 @@ dependencies {
 }
 
 // given path [src\main\java\Assignment5.java] where Assignment5.java is main class
-mainClassName = 'Assignment5' // should be correct ?
+mainClassName = 'Assignment5' // correct
 
 task unitTest( type: Test ) {
    useJUnitPlatform()
+}
+
+// Gradle Jacoco Report
+jacocoTestReport {
+    dependsOn test // tests are required to run before generating the report
+}
+jacoco {
+    toolVersion = "0.8.8"
+    reportsDirectory = layout.buildDirectory.dir('customJacocoReportDir')
+}
+jacocoTestReport {
+    reports {
+        xml.required = false
+        csv.required = false
+        html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
+    }
 }
 
 // Checkstyle
