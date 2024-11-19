@@ -27,7 +27,7 @@ dependencies {
 }
 
 // given path [src\Assignment5.java] where Assignment5.java is main class
-mainClassName = 'src.Assignment5' // should be correct ?
+mainClassName = 'Assignment5' // should be correct ?
 
 task unitTest( type: Test ) {
    useJUnitPlatform()
