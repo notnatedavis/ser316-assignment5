@@ -2,7 +2,7 @@
 
 // import x; // might need later
 /**
-  * public class Assignment 5
+  * Assignment5.java
   * @author Nathaniel Davis-Perez [ndavispe]
   * @since 11/19/2024
   */
