@@ -60,6 +60,13 @@ jobs:
     - name: Run Checkstyle
       run: ./gradlew checkstyleMain
 
+    # Upload JaCoCo HTML Report
+    - name: Upload JaCoCo HTML Report
+      uses: actions/upload-artifact@v3
+      with:
+        name: jacoco-report
+        path: build/jacocoHtml/
+
   dependency-submission:
     runs-on: ubuntu-latest
     permissions:
