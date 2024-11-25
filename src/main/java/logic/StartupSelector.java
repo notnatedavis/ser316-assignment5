@@ -3,8 +3,17 @@
  * logic\StartupSelector
  * 
  * @author Nathaniel Davis-Perez [ndavispe]
- * @since 11/19/2024
+ * @since 11/25/2024
  */
-public class StartupSelector {
-    // x
+
+package logic;
+
+import models.Startup;
+import java.util.List;
+import java.util.Scanner;
+
+public class StartupSelector { // update to include 3 options (full random, random by type, specific)
+    public static Startup selectStartup() {
+        System.out.println();
+    }
 }

@@ -3,8 +3,13 @@
  * logic\EventEffect
  * 
  * @author Nathaniel Davis-Perez [ndavispe]
- * @since 11/19/2024
+ * @since 11/25/2024
  */
-public class EventEffect {
-    // x
+
+package logic;
+
+import models.Startup;
+
+public interface EventEffect {
+    void applyEffect(Startup startup);
 }

@@ -3,23 +3,32 @@
  * models\TechGiant
  * 
  * @author Nathaniel Davis-Perez [ndavispe]
- * @since 11/19/2024
+ * @since 11/25/2024
  */
 
 package models;
 
-//import x; // might need
+import java.util.ArrayList;
+import java.util.List;
 
 public class TechGiant {
     private String name;
     private double funds;
-    private Startup startup;
+    private List<Startup> startups;
 
-    public TechGiant(String name, double funds, Startup startup) {
+    public TechGiant(String name, double funds) {
         this.name = name;
         this.funds = funds;
-        this.startup = startup;
+        this.startups = new ArrayList<>();
     }
 
-    // getters + setters + other logic
+    public void addStartup(Startup startup) {
+        startups.add(startup);
+    }
+    public void removeStartup(Startup startup) {
+        startups.remove(startup);
+    }
+    public boolean hasStartups() {
+        return !startups.isEmpty(); // returns T if not empty
+    }
 }

@@ -3,8 +3,16 @@
  * logic\OutputFormatter
  * 
  * @author Nathaniel Davis-Perez [ndavispe]
- * @since 11/19/2024
+ * @since 11/25/2024
  */
+
+package logic;
+
 public class OutputFormatter {
-    // x
+    public static void printSeparator() {
+        System.out.println("----------------------");
+    }
+    public static void printMessage(String message) {
+        System.out.println(message);
+    }
 }
