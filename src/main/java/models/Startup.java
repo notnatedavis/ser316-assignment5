@@ -1,3 +1,5 @@
+package models;
+
 /**
  * Startup.java
  * models\Startup
@@ -5,8 +7,6 @@
  * @author Nathaniel Davis-Perez [ndavispe]
  * @since 11/25/2024
  */
-
-package models;
 
 public class Startup {
     private String name;

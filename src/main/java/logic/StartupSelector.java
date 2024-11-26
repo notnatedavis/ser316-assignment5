@@ -1,3 +1,10 @@
+package logic;
+
+import models.Startup;
+import java.util.List;
+import java.util.Scanner;
+import java.util.Random;
+
 /**
  * StartupSelector.java
  * logic\StartupSelector
@@ -5,13 +12,6 @@
  * @author Nathaniel Davis-Perez [ndavispe]
  * @since 11/25/2024
  */
-
-package logic;
-
-import models.Startup;
-import java.util.List;
-import java.util.Scanner;
-import java.util.Random;
 
 public class StartupSelector {
     
@@ -42,7 +42,7 @@ public class StartupSelector {
         }
     }
 
-    private static Startup selectRandomStartup(List<Startup> startups) {
+    public static Startup selectRandomStartup(List<Startup> startups) {
         Random random = new Random();
         int index = random.nextInt(startups.size()); // rolls a random int size of startups
         Startup choice = startups.get(index);

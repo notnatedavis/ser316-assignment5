@@ -1,11 +1,3 @@
-/**
- * GameEngine.java
- * logic\GameEngine
- * 
- * @author Nathaniel Davis-Perez [ndavispe]
- * @since 11/25/2024
- */
-
 package logic;
 
 import data.StartupData;
@@ -14,6 +6,14 @@ import models.TechGiant;
 
 import java.util.List;
 import java.util.Scanner;
+
+/**
+ * GameEngine.java
+ * logic\GameEngine
+ * 
+ * @author Nathaniel Davis-Perez [ndavispe]
+ * @since 11/25/2024
+ */
 
 public class GameEngine {
     public void startGame() {
@@ -51,7 +51,7 @@ public class GameEngine {
                 System.out.println("\nQuarter " + quarter);
 
                 switch (quarter) {
-                    case 1, 3 -> handlePlayerActions(scanner, playerTechGiant);
+                    case 1, 3 -> handlePlayerActions(scanner, playerTechGiant, startups);
                     case 2 -> handleEvent(playerTechGiant, botTechGiant);
                     case 4 -> handleBattle(playerTechGiant, botTechGiant);
                 }
@@ -70,7 +70,7 @@ public class GameEngine {
         scanner.close();
     }
     
-    private void handlePlayerActions(Scanner scanner, TechGiant playerTechGiant) {
+    private void handlePlayerActions(Scanner scanner, TechGiant playerTechGiant, List<Startup> startups) {
         System.out.println("\nPlayer Actions Menu:");
         System.out.println("1. Invest in your startup");
         System.out.println("2. Buy a new startup");
@@ -81,7 +81,7 @@ public class GameEngine {
 
         switch (choice) {
             case 1 -> playerTechGiant.investInStartup(scanner);
-            case 2 -> playerTechGiant.buyStartup(scanner);
+            case 2 -> playerTechGiant.buyStartup(scanner, startups); // pass startups list
             case 3 -> playerTechGiant.sellStartup(scanner);
             case 4 -> System.out.println("Skipping this turn...");
         }

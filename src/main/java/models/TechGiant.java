@@ -1,11 +1,3 @@
-/**
- * TechGiant.java
- * models\TechGiant
- * 
- * @author Nathaniel Davis-Perez [ndavispe]
- * @since 11/25/2024
- */
-
 package models;
 
 import java.util.ArrayList;
@@ -14,15 +6,25 @@ import java.util.Scanner;
 
 import logic.InputHandler;
 
+/**
+ * TechGiant.java
+ * models\TechGiant
+ * 
+ * @author Nathaniel Davis-Perez [ndavispe]
+ * @since 11/25/2024
+ */
+
 public class TechGiant {
     private String name;
     private double funds;
     private List<Startup> startups;
 
-    public TechGiant(String name, double funds) {
+    // constructor
+    public TechGiant(String name, double funds, Startup initialStartup) {
         this.name = name;
         this.funds = funds;
         this.startups = new ArrayList<>();
+        this.startups.add(initialStartup);
     }
 
     public void addStartup(Startup startup) {

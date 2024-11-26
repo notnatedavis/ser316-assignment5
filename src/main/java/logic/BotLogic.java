@@ -1,3 +1,7 @@
+package logic;
+
+import models.TechGiant;
+
 /**
  * BotLogic.java
  * logic\BotLogic
@@ -5,10 +9,6 @@
  * @author Nathaniel Davis-Perez [ndavispe]
  * @since 11/25/2024
  */
-
-package logic;
-
-import models.TechGiant;
 
 public class BotLogic {
     public void makeDecision(TechGiant bot) {

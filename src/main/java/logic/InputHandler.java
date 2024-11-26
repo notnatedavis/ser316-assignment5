@@ -1,3 +1,7 @@
+package logic;
+
+import java.util.Scanner;
+
 /**
  * InputHandler.java
  * logic\InputHandler
@@ -5,10 +9,6 @@
  * @author Nathaniel Davis-Perez [ndavispe]
  * @since 11/25/2024
  */
-
-package logic;
-
-import java.util.Scanner;
 
 public class InputHandler {
     public static int returnValidIntInput(Scanner scanner, int min, int max) {
