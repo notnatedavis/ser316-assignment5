@@ -13,7 +13,6 @@ import logic.InputHandler;
  * @author Nathaniel Davis-Perez [ndavispe]
  * @since 11/25/2024
  */
-
 public class TechGiant {
 
     // declare variables

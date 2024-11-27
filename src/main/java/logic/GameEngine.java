@@ -182,9 +182,14 @@ public class GameEngine {
 
         // battle continues until one startup's revenue drops to 0
         while (playerStartup.getRevenue() > 0 && botStartup.getRevenue() > 0) {
-            executeAttack(playerStartup, botStartup);
-            if (botStartup.getRevenue() <= 0) break;
-            executeAttack(botStartup, playerStartup);
+            // player chooses attack
+            int playerChoice = getPlayerAttackChoice(playerStartup);
+            executePlayerAttack(playerChoice, playerStartup, botStartup);
+            if (botStartup.getRevenue() <= 0) break; // if bot dies
+
+            // bot chooses random attack
+            int botChoice = getRandomAttackChoice(); //
+            executeBotAttack(botChoice, botStartup, playerStartup);
         }
 
         // determine winner and apply results
@@ -291,29 +296,6 @@ public class GameEngine {
     }
 
     /**
-     * Handles attacking between players w/
-     * 
-     * @param attacker
-     * @param defender
-     */
-    private void executeAttack(Startup attacker, Startup defender) {
-        if (Math.random() < 0.15) {
-            System.out.println(attacker.getName() + " missed the attack!");
-            return;
-        }
-    
-        double attackPower = attacker.getNetIncome();
-
-        if (Math.random() < 0.5) {
-            attackPower *= 2; // critical attack chance
-            System.out.println(attacker.getName() + " landed a critical attack");
-        }
-    
-        defender.decreaseRevenueByPercentage(attackPower / defender.getRevenue());
-        System.out.println(attacker.getName() + " attacked " + defender.getName() + " for " + attackPower + " damage.");
-    }
-
-    /**
      * Increases all attributes for startup by percentage
      * 
      * @param startup
@@ -335,5 +317,38 @@ public class GameEngine {
         startup.decreaseRevenueByPercentage(percentage);
         startup.decreaseMarketShareByPercentage(percentage);
         startup.decreaseNetIncomeByPercentage(percentage);
+    }
+
+    private int getPlayerAttackChoice(Startup playerStartup) {
+        Scanner scanner = new Scanner(System.in); // create scanner instance for input
+
+        // print menu
+        System.out.println("\nChoose your attack:");
+        System.out.println("1. " + playerStartup.getAttack1());
+        System.out.println("2. " + playerStartup.getAttack2());
+        System.out.println("3. " + playerStartup.getAttack3());
+
+        return InputHandler.returnValidIntInput(scanner, 1, 3);
+    }
+
+    private void executePlayerAttack(int choice, Startup playerStartup, Startup botStartup) {
+        switch (choice) {
+            case 1 -> playerStartup.executeAttack1(botStartup);
+            case 2 -> playerStartup.executeAttack2(botStartup);
+            case 3 -> playerStartup.executeAttack3(botStartup);
+        }
+    }
+
+    private int getRandomAttackChoice() {
+        return (int) (Math.random() * 3) + 1; // roll random 1-3
+    }
+
+    private void executeBotAttack(int choice, Startup botStartup, Startup playerStartup) {
+        System.out.println("\n" + botStartup.getName() + " is plotting your defeat...");
+        switch (choice) {
+            case 1 -> botStartup.executeAttack1(playerStartup);
+            case 2 -> botStartup.executeAttack2(playerStartup);
+            case 3 -> botStartup.executeAttack3(playerStartup);
+        }
     }
 }
