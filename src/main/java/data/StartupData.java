@@ -18,32 +18,32 @@ public class StartupData {
     public static List<Startup> initializeStartups() {
         return Arrays.asList(
             // Social Media
-            new Startup("Instagram", "Social Media", 1_000_000, 200_000, 15.0, 100, "A1", "A2", "A3"),  // # 1
-            new Startup("Snapchat", "Social Media", 900_000, 180_000, 12.0, 100, "B1", "B2", "B3"),    // # 2
-            new Startup("Pinterest", "Social Media", 850_000, 150_000, 10.0, 100, "C1", "C2", "C3"),   // # 3
-            new Startup("Facebook", "Social Media", 2_000_000, 300_000, 25.0, 100, "D1", "D2", "D3"),  // # 4
+            new Startup("Instagram", "Social Media", 2_100, 250, 11.0, 450, "Influencer Invasion", "Story Swipe", "Filter Frenzy"), // # 1
+            new Startup("Snapchat" , "Social Media", 2_000, 240, 9.0, 400, "Snap Surge", "Selfie Snatch", "Ghost Protocol"), // # 2
+            new Startup("Pinterest", "Social Media", 1_900, 240, 10.0, 400, "Pinpoint Precision", "Board Bombardment", "Pinning Panic"), // # 3
+            new Startup("Facebook" , "Social Media", 2_200, 260, 12.0, 500, "Like Lockdown", "Timeline Takedown", "Feed Frenzy"), // # 4
 
             // Medical
-            new Startup("Pfizer", "Medical", 3_000_000, 500_000, 20.0, 100, "E1", "E2", "E3"),         // # 5
-            new Startup("Johnson&Johnson", "Medical", 2_800_000, 450_000, 18.0, 100, "F1", "F2", "F3"),// # 6
-            new Startup("Bayer", "Medical", 2_500_000, 400_000, 15.0, 100, "G1", "G2", "G3"),          // # 7
+            new Startup("Pfizer"         , "Medical", 4_000, 220, 17.0, 1_000, "Vaccine Vengeance", "Pill Push", "Cure Crash"), // # 5
+            new Startup("Johnson&Johnson", "Medical", 4_000, 210, 16.0, 950, "Bandage Blockade", "Surgical Strike", "Healing Havoc"), // # 6
+            new Startup("Bayer"          , "Medical", 4_000, 200, 15.0, 900, "Pill Pulverizer", "Formula Fiasco", "Prescription Panic"), // # 7
 
             // Military
-            new Startup("Boeing", "Military", 4_000_000, 600_000, 25.0, 100, "H1", "H2", "H3"),        // # 8
-            new Startup("Lockheed Martin", "Military", 3_800_000, 550_000, 22.0, 100, "I1", "I2", "I3"),// # 9
-            new Startup("Raytheon", "Military", 3_500_000, 500_000, 20.0, 100, "J1", "J2", "J3"),      // # 10
+            new Startup("Boeing"         , "Military", 2_500, 355, 21.0, 1_500, "Missile Strike", "Jetstream Juggernaut", "Aerospace Assault"), // # 8
+            new Startup("Lockheed Martin", "Military", 2_500, 350, 20.0, 1_400, "Stealth Strike", "Radar Rip", "Lockdown Launch"), // # 9
+            new Startup("Raytheon"       , "Military", 2_500, 340, 19.0, 1_300, "Missile Mayhem", "Radar Rampage", "Target Lock"), // # 10
 
             // Tech
-            new Startup("Apple", "Tech", 5_000_000, 800_000, 35.0, 100, "K1", "K2", "K3"),             // # 11
-            new Startup("Google", "Tech", 4_800_000, 750_000, 30.0, 100, "L1", "L2", "L3"),            // # 12
-            new Startup("Amazon", "Tech", 4_500_000, 700_000, 28.0, 100, "M1", "M2", "M3"),            // # 13
-            new Startup("Microsoft", "Tech", 5_200_000, 850_000, 32.0, 100, "N1", "N2", "N3"),         // # 14
+            new Startup("Apple"    , "Tech", 2_300, 310, 13.0, 700, "iPad Brainwash", "Siri Shutdown", "App Attack"), // # 11
+            new Startup("Google"   , "Tech", 2_200, 300, 12.0, 660, "Search Surge", "Algorithm Ambush", "Data Dive"), // # 12
+            new Startup("Amazon"   , "Tech", 2_100, 290, 11.0, 620, "Prime Pounce", "Cart Capture", "Delivery Drop"), // # 13
+            new Startup("Microsoft", "Tech", 2_000, 280, 10.0, 580, "Windows Wipeout", "Software Siege", "Cloud Crash"), // # 14
 
             // Financial Tech
-            new Startup("Chase", "Financial Tech", 3_000_000, 400_000, 20.0, 100, "O1", "O2", "O3"),   // # 15
-            new Startup("PayPal", "Financial Tech", 2_800_000, 380_000, 18.0, 100, "P1", "P2", "P3"),  // # 16
-            new Startup("JPMorgan", "Financial Tech", 2_600_000, 350_000, 16.0, 100, "Q1", "Q2", "Q3"),// # 17
-            new Startup("Venmo", "Financial Tech", 2_500_000, 340_000, 15.0, 100, "R1", "R2", "R3")    // # 18
+            new Startup("Chase"   , "Financial Tech", 3_100, 220, 15.0, 750, "Banking Blitz", "Credit Crunch", "Vault Vanquish"), // # 15
+            new Startup("PayPal"  , "Financial Tech", 3_000, 210, 14.0, 730, "Payback Payback", "Transfer Takedown", "Payment Plunge"), // # 16
+            new Startup("JPMorgan", "Financial Tech", 2_900, 200, 13.0, 710, "Stock Stomp", "Ledger Lock", "Wall Street Wreck"), // # 17
+            new Startup("Venmo"   , "Financial Tech", 2_800, 190, 12.0, 690, "Cash Clash", "Transaction Trap", "Pay-off Plunge")  // # 18
         );
     }
 }

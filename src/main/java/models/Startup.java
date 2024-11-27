@@ -53,9 +53,9 @@ public class Startup {
         this.xp = 0; // start with 0 xp
 
         // initialize unique attacks
-        this.attack1 = attack1;
-        this.attack2 = attack2;
-        this.attack3 = attack3;
+        this.attack1 = attack1; // market share
+        this.attack2 = attack2; // net income
+        this.attack3 = attack3; // revenue
     }
 
     // getters & setters
