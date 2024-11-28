@@ -12,5 +12,5 @@
 > I fulfilled the requirements for a Singleton Pattern by only initializing a singular instance of GameEngine for the game.  
 
 ### List of sources  
-> (https://www.digitalocean.com/community/tutorials/java-design-patterns-example-tutorial) - used for understanding of concepts
+> (https://www.digitalocean.com/community/tutorials/java-design-patterns-example-tutorial) - used for understanding of concepts  
 > (https://gameprogrammingpatterns.com/contents.html) - used for implementation of structure and logic
