@@ -176,6 +176,11 @@ public class Startup {
         netIncome += netIncome * 0.1; // increase netIncome by 10%
     }
 
+    /**
+     * Handles executing attack x1 (market share) taking into account type weaknesses + printing indicator
+     * 
+     * @param opponent
+     */
     public void executeAttack1(Startup opponent) {
         double multiplier = calculateEffectiveness(opponent.getType());
         double impact = attack1Effect * multiplier / 100.0; // convert to %
@@ -185,6 +190,11 @@ public class Startup {
         (multiplier > 1 ? "super effective!" : multiplier < 1 ? "not very effective..." : "normal effectiveness"));
     }
 
+    /**
+     * Handles executing attack x2 (net income) taking into account type weakness + printing indicator
+     * 
+     * @param opponent
+     */
     public void executeAttack2(Startup opponent) {
         double multiplier = calculateEffectiveness(opponent.getType());
         double impact = attack2Effect * multiplier / 100.0; // convert to %
@@ -194,6 +204,12 @@ public class Startup {
         (multiplier > 1 ? "super effective!" : multiplier < 1 ? "not very effective..." : "normal effectiveness"));
     }
     
+    /**
+     * Handles executing attack x3 (revenue/health) taking into account type weakness, had to
+     * change to decreaseRevenueByAmount since by % would never kill.
+     * 
+     * @param opponent
+     */
     public void executeAttack3(Startup opponent) {
         double multiplier = calculateEffectiveness(opponent.getType());
         double impact = attack3Effect * multiplier / 100.0; // convert to %
@@ -203,6 +219,12 @@ public class Startup {
         (multiplier > 1 ? "super effective!" : multiplier < 1 ? "not very effective..." : "normal effectiveness"));
     }
 
+    /**
+     * Handles attack effectiveness comparisons between types returning multiplier
+     * 
+     * @param opponentType
+     * @return
+     */
     public double calculateEffectiveness(String opponentType) {
         if (isStrongAgainst(opponentType)) {
             return 1.2; // strong multiplier
@@ -212,6 +234,13 @@ public class Startup {
         return 1.0; // neutral multiplier
     }
 
+    /**
+     * Helper method for simple type comparisons, 
+     * handles returning boolean if xStartupType > yStartuptype
+     * 
+     * @param opponentType
+     * @return
+     */
     public boolean isStrongAgainst(String opponentType) {
         switch (this.type) {
             case "Fin Tech":
@@ -229,6 +258,13 @@ public class Startup {
         }
     }
 
+    /**
+     * Helper method for simple type comparisons, 
+     * handles returning boolean if xStartupType > yStartuptype
+     * 
+     * @param opponentType
+     * @return
+     */
     public boolean isWeakAgainst(String opponentType) {
         switch (this.type) {
             case "Fin Tech":

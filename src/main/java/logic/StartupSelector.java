@@ -13,7 +13,6 @@ import java.security.SecureRandom; // spotbugs
  * @author Nathaniel Davis-Perez [ndavispe]
  * @since 11/25/2024
  */
-
 public class StartupSelector {
 
     private static final SecureRandom secureRandom = new SecureRandom(); // safer random
@@ -58,7 +57,7 @@ public class StartupSelector {
     }
 
     /**
-     * Randomly selects a startup from list
+     * Handles randomly selecting a startup from list
      * 
      * @param startups
      * @return
@@ -71,7 +70,7 @@ public class StartupSelector {
     }
 
     /**
-     * Randomly select a startup from a specific type
+     * Randomly select a startup from a specific type w/ menu + user input
      * 
      * @param scanner
      * @param startups
@@ -118,7 +117,7 @@ public class StartupSelector {
     }
 
     /**
-     * Select specific startup from all startups
+     * Select specific startup from all startups w/ menu + user input
      * 
      * @param scanner
      * @param startups

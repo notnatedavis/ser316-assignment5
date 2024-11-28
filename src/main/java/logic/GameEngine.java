@@ -18,6 +18,7 @@ import java.security.SecureRandom;
  */
 public class GameEngine {
 
+    // SpotBugs recommendation warning for a better random
     private SecureRandom secureRandom = new SecureRandom();
 
     // begins game
@@ -82,7 +83,7 @@ public class GameEngine {
                 }
             }
 
-            year++;
+            year++; // 4 q / 1 y
         }
 
         // 6. game over
@@ -249,7 +250,7 @@ public class GameEngine {
     }
 
     /**
-     * Event (Economic Downturn) w/ corresponding effects to startups
+     * Handles Event (Economic Downturn) w/ corresponding effects to startups
      * 
      * @param techGiant
      */
@@ -266,7 +267,7 @@ public class GameEngine {
     }
 
     /**
-     * Event (Regulatory Scrutiny) w/ corresponding effects to startups
+     * Handles Event (Regulatory Scrutiny) w/ corresponding effects to startups
      * 
      * @param techGiant
      */
@@ -283,7 +284,7 @@ public class GameEngine {
     }
 
     /**
-     * Reduces all TechGiant's startup revenue (health) by percentage
+     * Handles reducing all TechGiant's startup revenue (health) by percentage
      * 
      * @param techGiant
      * @param percentage
@@ -296,7 +297,7 @@ public class GameEngine {
     }
     
     /**
-     * Increases all TechGiant's startup revenue (health) by percentage
+     * Handles increasing all TechGiant's startup revenue (health) by percentage
      * 
      * @param techGiant
      * @param percentage
@@ -342,6 +343,12 @@ public class GameEngine {
         startup.decreaseNetIncomeByPercentage(percentage);
     }
 
+    /**
+     * Handles player's chosen attack from menu when prompted for battle
+     * 
+     * @param playerStartup
+     * @return
+     */
     private int getPlayerAttackChoice(Startup playerStartup) {
         Scanner scanner = new Scanner(System.in, "UTF-8"); // create scanner instance for input
 
@@ -354,6 +361,13 @@ public class GameEngine {
         return InputHandler.returnValidIntInput(scanner, 1, 3);
     }
 
+    /**
+     * Handles passing player's selected attack and executing it
+     * 
+     * @param choice
+     * @param playerStartup
+     * @param botStartup
+     */
     private void executePlayerAttack(int choice, Startup playerStartup, Startup botStartup) {
         switch (choice) {
             case 1 -> playerStartup.executeAttack1(botStartup);
@@ -363,6 +377,13 @@ public class GameEngine {
         }
     }
 
+    /**
+     * Handles passing bot's selected attack and executing it
+     * 
+     * @param choice
+     * @param botStartup
+     * @param playerStartup
+     */
     private void executeBotAttack(int choice, Startup botStartup, Startup playerStartup) {
         switch (choice) {
             case 1 -> botStartup.executeAttack1(playerStartup);
@@ -372,6 +393,11 @@ public class GameEngine {
         }
     }
 
+    /**
+     * Able to use secureRandom for random within bounds (for attacking intention)
+     * 
+     * @return
+     */
     private int getRandomAttackChoice() {
         return secureRandom.nextInt(3) + 1; // roll random 1-3
     }
