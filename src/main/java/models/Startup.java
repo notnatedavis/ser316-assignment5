@@ -28,9 +28,9 @@ public class Startup {
     private String attack3; // x3 : reduces opponent's revenue
 
     // attack effects
-    private int attack1Effect = 1; //temp
-    private int attack2Effect = 1;
-    private int attack3Effect = 1;
+    private int attack1Effect = 10; 
+    private int attack2Effect = 10;
+    private int attack3Effect = 35000; // = 350 dmg base ?
 
     /**
      * Constructs new Startup with params
@@ -107,7 +107,7 @@ public class Startup {
         revenue += revenue * percentage;
     }
     public void decreaseRevenueByPercentage(double percentage) {
-        revenue -= revenue * percentage;
+        revenue -= (revenue * percentage) - 2;
     }
 
     // +- MarketShare by %
@@ -124,6 +124,14 @@ public class Startup {
     }
     public void decreaseNetIncomeByPercentage(double percentage) {
         netIncome -= netIncome * percentage;
+    }
+
+    // - Revenue by amount
+    public void decreaseRevenueByAmount(double amount) {
+        this.revenue -= amount;
+        if (this.revenue < 0) {
+            this.revenue = 0; // if (-) reset to 0
+        }
     }
 
     // calculates xp required for startup to level up
@@ -169,18 +177,73 @@ public class Startup {
     }
 
     public void executeAttack1(Startup opponent) {
-        opponent.decreaseMarketShareByPercentage(attack1Effect / 100.0); // convert to %
-        System.out.println(this.name + " used " + attack1 + " on " + opponent.getName());
+        double multiplier = calculateEffectiveness(opponent.getType());
+        double impact = attack1Effect * multiplier / 100.0; // convert to %
+        opponent.decreaseMarketShareByPercentage(impact);
+        System.out.println(this.name + " used " + attack1 + " on " + opponent.getName() + " with " + 
+        // check multiplier and print corresponding level of effectiveness
+        (multiplier > 1 ? "super effective!" : multiplier < 1 ? "not very effective..." : "normal effectiveness"));
     }
 
     public void executeAttack2(Startup opponent) {
-        opponent.decreaseNetIncomeByPercentage(attack2Effect / 100.0);
-        System.out.println(this.name + " used " + attack2 + " on " + opponent.getName());
+        double multiplier = calculateEffectiveness(opponent.getType());
+        double impact = attack2Effect * multiplier / 100.0; // convert to %
+        opponent.decreaseNetIncomeByPercentage(impact);
+        System.out.println(this.name + " used " + attack2 + " on " + opponent.getName() + " with " + 
+        // check multiplier and print corresponding level of effectiveness
+        (multiplier > 1 ? "super effective!" : multiplier < 1 ? "not very effective..." : "normal effectiveness"));
     }
     
     public void executeAttack3(Startup opponent) {
-        opponent.decreaseRevenueByPercentage(attack3Effect / 100.0);
-        System.out.println(this.name + " used " + attack3 + " on " + opponent.getName());
+        double multiplier = calculateEffectiveness(opponent.getType());
+        double impact = attack3Effect * multiplier / 100.0; // convert to %
+        opponent.decreaseRevenueByAmount(impact); // unique to revenue (so they can die)
+        System.out.println(this.name + " used " + attack3 + " on " + opponent.getName() + " with " + 
+        // check multiplier and print corresponding level of effectiveness
+        (multiplier > 1 ? "super effective!" : multiplier < 1 ? "not very effective..." : "normal effectiveness"));
+    }
+
+    public double calculateEffectiveness(String opponentType) {
+        if (isStrongAgainst(opponentType)) {
+            return 1.2; // strong multiplier
+        } else if (isWeakAgainst(opponentType)) {
+            return 0.8; // weak multiplier
+        }
+        return 1.0; // neutral multiplier
+    }
+
+    public boolean isStrongAgainst(String opponentType) {
+        switch (this.type) {
+            case "Fin Tech":
+                return opponentType.equals("Tech");
+            case "Tech":
+                return opponentType.equals("Military");
+            case "Military":
+                return opponentType.equals("Medical");
+            case "Medical":
+                return opponentType.equals("Social Media");
+            case "Social Media":
+                return opponentType.equals("Fin Tech");
+            default:
+                return false; // same type
+        }
+    }
+
+    public boolean isWeakAgainst(String opponentType) {
+        switch (this.type) {
+            case "Fin Tech":
+                return opponentType.equals("Social Media");
+            case "Tech":
+                return opponentType.equals("Fin Tech");
+            case "Military":
+                return opponentType.equals("Tech");
+            case "Medical":
+                return opponentType.equals("Military");
+            case "Social Media":
+                return opponentType.equals("Medical");
+            default:
+                return false; // same type
+        }
     }
 
     // toString method for printing consistent updates

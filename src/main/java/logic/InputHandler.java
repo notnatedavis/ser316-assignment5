@@ -1,5 +1,6 @@
 package logic;
 
+import java.io.Console;
 import java.util.Scanner;
 
 /**
@@ -30,7 +31,7 @@ public class InputHandler {
                 if (input >= min && input <= max) {
                     return input;
                 }
-                System.out.println("Enter a number between " + min + " and " + max + ".");
+                System.out.println("Enter a number between " + min + " and " + max);
             } catch (NumberFormatException e) {
                 //System.out.println(e);
             }

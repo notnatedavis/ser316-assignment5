@@ -4,6 +4,7 @@ import models.Startup;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Random;
+import java.security.SecureRandom; // spotbugs
 
 /**
  * StartupSelector.java
@@ -14,6 +15,9 @@ import java.util.Random;
  */
 
 public class StartupSelector {
+
+    private static final SecureRandom secureRandom = new SecureRandom(); // safer random
+
     /**
      * Handles initial startup selection process when starting
      * 
@@ -60,8 +64,7 @@ public class StartupSelector {
      * @return
      */
     public static Startup selectRandomStartup(List<Startup> startups) {
-        Random random = new Random();
-        int index = random.nextInt(startups.size()); // rolls a random int size of startups
+        int index = secureRandom.nextInt(startups.size()); // rolls a random int size of startups
         Startup choice = startups.get(index);
         System.out.println("Randomly selected startup: " + choice.getName() + " (" + choice.getType() + ")");
         return choice;
@@ -106,8 +109,7 @@ public class StartupSelector {
         int endIndex = (choice == typeRanges.length) ? startups.size() : typeRanges[choice];
 
         // select a random startup from selected type
-        Random random = new Random();
-        int randomIndex = startIndex + random.nextInt(endIndex - startIndex);
+        int randomIndex = startIndex + secureRandom.nextInt(endIndex - startIndex);
         Startup selected = startups.get(randomIndex);
 
         // print to player & update

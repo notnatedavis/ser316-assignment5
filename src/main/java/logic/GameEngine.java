@@ -7,6 +7,7 @@ import models.TechGiant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.security.SecureRandom;
 
 /**
  * GameEngine.java
@@ -17,13 +18,15 @@ import java.util.Scanner;
  */
 public class GameEngine {
 
+    private SecureRandom secureRandom = new SecureRandom();
+
     // begins game
     public void startGame() {
 
         //  upon starting always . . .
 
         // initialize scanner & update player
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in, "UTF-8");
         System.out.println("Initializing game . . .");
 
         // 1. load StartupData & local clone
@@ -57,9 +60,19 @@ public class GameEngine {
                 System.out.println("\nQuarter " + quarter);
 
                 switch (quarter) {
-                    case 1, 3 -> handlePlayerActions(scanner, playerTechGiant, availableStartups);
-                    case 2 -> handleEvent(playerTechGiant, botTechGiant);
-                    case 4 -> handleBattle(playerTechGiant, botTechGiant);
+                    case 1 :
+                    case 3 : //combine case 1 & 3
+                        handlePlayerActions(scanner, playerTechGiant, availableStartups);
+                        break;
+                    case 2 :
+                        handleEvent(playerTechGiant, botTechGiant);
+                        break;
+                    case 4 : 
+                        handleBattle(playerTechGiant, botTechGiant);
+                        break;
+                    default :
+                        System.out.println("invalid choice");
+                        break;
                 }
 
                 // Game over check after each quarter
@@ -100,6 +113,7 @@ public class GameEngine {
             case 2 -> playerTechGiant.buyStartup(scanner, availableStartups); // pass availableStartups  list
             case 3 -> playerTechGiant.sellStartup(scanner);
             case 4 -> System.out.println("Skipping this turn...");
+            default -> System.out.println("invalid choice");
         }
     }
 
@@ -162,6 +176,7 @@ public class GameEngine {
                 increaseAllStartupRevenues(playerTechGiant, 0.1); // Boost by 10%
                 increaseAllStartupRevenues(botTechGiant, 0.1);
             }
+            default -> System.out.println("invalid choice");
         }
     }
 
@@ -185,21 +200,29 @@ public class GameEngine {
             // player chooses attack
             int playerChoice = getPlayerAttackChoice(playerStartup);
             executePlayerAttack(playerChoice, playerStartup, botStartup);
+            
+            // display revenue (health) after player's move
+            System.out.println("\n" + playerStartup.getName() + " (Player) Revenue : " + playerStartup.getRevenue());
+            System.out.println(botStartup.getName() + " (Bot) Revenue : " + botStartup.getRevenue());
+
             if (botStartup.getRevenue() <= 0) break; // if bot dies
 
             // bot chooses random attack
             int botChoice = getRandomAttackChoice(); //
             executeBotAttack(botChoice, botStartup, playerStartup);
+
+            System.out.println("\n" + playerStartup.getName() + " (Player) Revenue : " + playerStartup.getRevenue());
+            System.out.println(botStartup.getName() + " (Bot) Revenue : " + botStartup.getRevenue());
         }
 
         // determine winner and apply results
         if (playerStartup.getRevenue() > 0) {
             System.out.println(playerStartup.getName() + " wins!");
-            playerTechGiant.setFunds(playerTechGiant.getFunds() + 500); // Reward funds // UPDATE
+            playerTechGiant.setFunds(playerTechGiant.getFunds() + 300); // Reward funds // UPDATE
             boostAttributes(playerStartup, 0.1); // Boost attributes by 10%
         } else {
             System.out.println(botStartup.getName() + " wins!");
-            botTechGiant.setFunds(botTechGiant.getFunds() + 500); // Reward funds
+            botTechGiant.setFunds(botTechGiant.getFunds() + 300); // Reward funds
             reduceAttributes(playerStartup, 0.1); // Reduce attributes by 10%
         }
     }
@@ -320,7 +343,7 @@ public class GameEngine {
     }
 
     private int getPlayerAttackChoice(Startup playerStartup) {
-        Scanner scanner = new Scanner(System.in); // create scanner instance for input
+        Scanner scanner = new Scanner(System.in, "UTF-8"); // create scanner instance for input
 
         // print menu
         System.out.println("\nChoose your attack:");
@@ -336,19 +359,20 @@ public class GameEngine {
             case 1 -> playerStartup.executeAttack1(botStartup);
             case 2 -> playerStartup.executeAttack2(botStartup);
             case 3 -> playerStartup.executeAttack3(botStartup);
+            default -> System.out.println("invalid choice");
         }
     }
 
-    private int getRandomAttackChoice() {
-        return (int) (Math.random() * 3) + 1; // roll random 1-3
-    }
-
     private void executeBotAttack(int choice, Startup botStartup, Startup playerStartup) {
-        System.out.println("\n" + botStartup.getName() + " is plotting your defeat...");
         switch (choice) {
             case 1 -> botStartup.executeAttack1(playerStartup);
             case 2 -> botStartup.executeAttack2(playerStartup);
             case 3 -> botStartup.executeAttack3(playerStartup);
+            default -> System.out.println("invalid choice");
         }
+    }
+
+    private int getRandomAttackChoice() {
+        return secureRandom.nextInt(3) + 1; // roll random 1-3
     }
 }

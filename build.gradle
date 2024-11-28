@@ -1,14 +1,18 @@
 // Plugins
 plugins {
-   id "checkstyle"
+   //id "checkstyle"
    id "application"
    id "com.github.spotbugs" version "5.0.13"
    id "jacoco"
 }
 
+run {
+ standardInput = System.in
+}
+
 // apply
 apply plugin: 'application'
-apply plugin: 'checkstyle'
+//apply plugin: 'checkstyle'
 apply plugin: 'jacoco'
 
 compileJava.options.encoding = 'UTF-8'
@@ -28,8 +32,8 @@ dependencies {
    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.9.0'
 }
 
-// given path [src\main\java\Assignment5.java] where Assignment5.java is main class
-mainClassName = 'Assignment5' // correct
+// given path [src\main\java\main\Main.java] 
+mainClassName = 'main.Main' // update ***
 
 // Unit Test task
 task unitTest( type: Test ) {
@@ -48,16 +52,16 @@ jacocoTestReport {
 }
 
 // Checkstyle
-checkstyle {
-   // keep checkstyle quieter
-   ignoreFailures = true
-   showViolations = false
-}
-tasks.withType(Checkstyle) {
-   checkstyle {
-      toolVersion = "8.8"
-   }
-}
+//checkstyle {
+//   toolVersion = '8.8'
+//    config = resources.text.fromFile('config/checkstyle/checkstyle.xml')
+//    ignoreFailures = true  
+//   showViolations = false
+//}
+//tasks.withType(Checkstyle).configureEach {
+//   source = sourceSets.main.allSource // tells Checkstyle to check all source files in main source set
+//   include '**/*.java' // include all java files
+//}
 
 // JUnit 5
 test {

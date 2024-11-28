@@ -3,6 +3,7 @@ package models;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Collections;
 
 import logic.InputHandler;
 
@@ -69,7 +70,7 @@ public class TechGiant {
         this.funds = funds;
     }
     public List<Startup> getStartups() {
-        return startups;
+        return Collections.unmodifiableList(startups); // spotbugs
     }
 
     /**
